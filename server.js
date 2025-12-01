@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { getLogs } from './db.js';
 dotenv.config();
 
 import cron from 'node-cron';
@@ -110,7 +111,7 @@ app.get('/api/appointments', isAuthorized, async (req, res) => {
 
 // 🔐 Protected: View booking history/logs
 app.get('/api/logs', isAuthorized, async (req, res) => {
-  const logs = await db.all(`SELECT * FROM logs`);
+  const logs = await getLogs();
   res.json(logs);
 });
 

@@ -1,86 +1,71 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
+// db.js
+import mongoose from 'mongoose';
 
-let db;
+const appointmentSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  service: String,
+  date: String,
+  time: String,
+}, { timestamps: true });
+
+const logSchema = new mongoose.Schema({
+  appointmentId: mongoose.Types.ObjectId,
+  action: String,
+  timestamp: String,
+});
+
+const Appointment = mongoose.model('Appointment', appointmentSchema);
+const Log = mongoose.model('Log', logSchema);
 
 export async function initDB() {
-  if (!db) {
-    db = await open({
-      filename: './appointments.db',
-      driver: sqlite3.Database
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
-
-    // Create tables if not exist
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS appointments (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        email TEXT,
-        service TEXT,
-        date TEXT,
-        time TEXT
-      );
-    `);
-
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS logs (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        appointmentId INTEGER,
-        action TEXT,
-        timestamp TEXT
-      );
-    `);
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
   }
 }
 
 export function getDB() {
-  return db;
+  return mongoose.connection;
 }
 
 export async function insertAppointment(name, email, service, date, time) {
-  const db = getDB();
-  const result = await db.run(
-    `INSERT INTO appointments (name, email, service, date, time) VALUES (?, ?, ?, ?, ?)`,
-    [name, email, service, date, time]
-  );
-
-  return result.lastID; // 🔁 Make sure this line exists
+  const appointment = new Appointment({ name, email, service, date, time });
+  const saved = await appointment.save();
+  return saved._id;
 }
 
 export async function getAppointments() {
-  await initDB();
-  return await db.all(`SELECT * FROM appointments`);
+  return await Appointment.find();
 }
 
 export async function isSlotTaken(service, date, time) {
-  await initDB();
-  const row = await db.get(
-    `SELECT * FROM appointments WHERE service = ? AND date = ? AND time = ?`,
-    [service, date, time]
-  );
-  return !!row;
+  const existing = await Appointment.findOne({ service, date, time });
+  return !!existing;
 }
 
-
 export async function updateAppointment(id, name, service, date, time) {
-  await initDB();
-  await db.run(
-    `UPDATE appointments SET name = ?, service = ?, date = ?, time = ? WHERE id = ?`,
-    [name, service, date, time, id]
-  );
+  await Appointment.findByIdAndUpdate(id, { name, service, date, time });
 }
 
 export async function deleteAppointment(id) {
-  await initDB();
-  await db.run(`DELETE FROM appointments WHERE id = ?`, [id]);
+  await Appointment.findByIdAndDelete(id);
 }
 
 export async function logAction(action, appointmentId) {
-  await initDB();
-  await db.run(
-    `INSERT INTO logs (appointmentId, action, timestamp) VALUES (?, ?, ?)`,
-    [appointmentId, action, new Date().toISOString()]
-  );
+  const log = new Log({
+    appointmentId,
+    action,
+    timestamp: new Date().toISOString()
+  });
+  await log.save();
 }
 
-
+export async function getLogs() {
+  return await Log.find();
+}
