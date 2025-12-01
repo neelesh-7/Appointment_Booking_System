@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin Dashboard</title>
+  <script>
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = '/login.html';
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h2 style="text-align: center;">Appointment Dashboard</h2>
+
+    <div class="theme-toggle">
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <!-- Calendar -->
+    <div id="calendar"></div>
+
+    <div id="editModal"
+      style="display:none; background:#fff; padding:20px; position:fixed; top:20%; left:30%; z-index:9999;">
+      <h3>Edit Appointment</h3>
+      <input id="edit-id" type="hidden">
+      <label for="name">Name:</label> <input id="edit-name"><br>
+      <label for="service">Service:</label>
+      <select id="edit-service">
+        <option>Web Design</option>
+        <option>Development</option>
+        <option>SEO</option>
+      </select><br>
+      <label for="date">Date:</label> <input id="edit-date" type="date"><br>
+      <label for="time">Time:</label> <input id="edit-time" type="time"><br><br>
+      <button style="border: 2px solid black;" onclick="saveEdit()">Save</button><br>
+      <button style="border: 2px solid black;" onclick="deleteAppointment()">Delete</button><br>
+      <button style="border: 2px solid black;" onclick="document.getElementById('editModal').style.display='none'">Cancel</button>
+    </div>
+    <button style="border: 2px solid black;" onclick="logout()">Logout</button>
+    <script>
+      function logout() {
+        localStorage.removeItem('loggedIn');
+        window.location.href = '/login.html';
+      }
+    </script>
+
+    <script>
+      const toggle = document.getElementById('themeSwitch');
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+
+      document.body.classList.add(`${currentTheme}-mode`);
+      toggle.checked = currentTheme === 'light';
+
+      toggle.addEventListener('change', () => {
+        const theme = toggle.checked ? 'light' : 'dark';
+        document.body.classList.remove('light-mode', 'dark-mode');
+        document.body.classList.add(`${theme}-mode`);
+        localStorage.setItem('theme', theme);
+      });
+    </script>
+
+    <!-- Your admin functionality -->
+    <script src="admin.js"></script>
+
+    <!-- FullCalendar v5.11.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+    <!-- Your calendar logic (must be last) -->
+    <script src="calendar.js"></script>
+
+
+</body>
+
+</html>

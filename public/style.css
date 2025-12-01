@@ -1,0 +1,397 @@
+:root {
+  --primary: #5a67d8;
+  --secondary: #2d3748;
+  --light: #f7fafc;
+  --dark: #1a202c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  background: var(--dark);
+  color: white;
+  padding: 20px 0;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hero */
+#hero {
+  background: var(--primary);
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+#hero h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  background: white;
+  color: var(--primary);
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #e2e8f0;
+}
+
+/* Services */
+#services {
+  padding: 60px 0;
+  background: white;
+  text-align: center;
+}
+
+.service-boxes {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.service {
+  background: var(--light);
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+/* Contact */
+#contact {
+  background: #edf2f7;
+  padding: 60px 0;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: auto;
+}
+
+input, textarea {
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Footer */
+footer {
+  background: var(--secondary);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+#booking {
+  background: #fff;
+  padding: 60px 0;
+  text-align: center;
+}
+
+#booking select,
+#booking input {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  display: block;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.form-response {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.fc-toolbar-title {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Calendar container styling */
+#calendar {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Dark mode */
+body.dark-mode #calendar {
+  background: #1e1e2f;
+  color: #e0e0e0;
+}
+
+/* Calendar header */
+.fc-toolbar-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+}
+
+body.dark-mode .fc-toolbar-title {
+  color: #fff;
+}
+
+/* Calendar buttons */
+.fc-button {
+  background-color: #6a5acd;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  font-weight: 500;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.fc-button:hover {
+  background-color: #5848c2;
+}
+
+.fc-button.fc-button-active {
+  background-color: #483d8b;
+}
+
+/* Event styling */
+.fc-event {
+  background-color: #6a5acd;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+body.dark-mode .fc-event {
+  background-color: #7b68ee;
+}
+
+/* Time grid appearance */
+.fc-timegrid-slot-label {
+  color: #666;
+}
+
+body.dark-mode .fc-timegrid-slot-label {
+  color: #aaa;
+}
+
+.fc-col-header-cell-cushion {
+  font-weight: 600;
+}
+
+/* Today highlight */
+.fc-day-today {
+  background-color: #f0f8ff !important;
+}
+
+body.dark-mode .fc-day-today {
+  background-color: #2a2a40 !important;
+}
+
+@media (max-width: 768px) {
+  #calendar {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.2rem;
+  }
+
+  .fc-button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+#calendar-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+body.dark-mode #calendar-section h2 {
+  color: #fff;
+}
+
+/* Base dark mode styles */
+body.dark-mode #hero {
+  background-color: #1e1e2f;
+}
+
+body.dark-mode .service {
+  background-color: #1e1e2f;
+}
+
+body.dark-mode #services {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode #contact {
+  background-color: #121212;
+}
+
+body.dark-mode #booking {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+body.dark-mode .container {
+  background-color: transparent;
+}
+
+body.dark-mode .btn {
+  background-color: #6a5acd;
+  color: #fff;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5 {
+  color: #fff;
+}
+
+/* Dark mode for FullCalendar */
+body.dark-mode .fc {
+  background-color: #1e1e2f;
+  color: #e0e0e0;
+}
+
+body.dark-mode .fc-toolbar-title,
+body.dark-mode .fc-col-header-cell-cushion {
+  color: #fff;
+}
+
+body.dark-mode .fc-event {
+  background-color: #7b68ee;
+  color: white;
+}
+
+/* Toggle Switch Styles */
+.switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  z-index: 1000;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px; width: 26px;
+  left: 4px; bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Toggled ON */
+input:checked + .slider {
+  background-color: #6a5acd;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+

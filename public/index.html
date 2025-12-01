@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stellar Web</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">Stellar</h1>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider"></span>
+    </label>
+
+
+    <section id="hero">
+        <div class="container">
+            <h2>Shine Bright with Stellar Web Solutions</h2>
+            <p>Designing Tomorrow’s Web, Today.</p><br>
+            <a href="#contact" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h3>Our Services</h3>
+            <div class="service-boxes">
+                <div class="service">
+                    <h4>Web Design</h4>
+                    <p>Responsive and beautiful UI/UX design that converts.</p>
+                </div>
+                <div class="service">
+                    <h4>Development</h4>
+                    <p>Robust frontend + backend solutions built to scale.</p>
+                </div>
+                <div class="service">
+                    <h4>SEO & Analytics</h4>
+                    <p>Optimize your presence and measure what matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h3>Contact Us</h3>
+            <form id="contactForm">
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="booking">
+        <div class="container">
+            <h3>Book an Appointment</h3>
+            <form id="bookingForm">
+                <input type="text" name="fullname" placeholder="Full Name" required />
+                <input type="email" name="email" placeholder="Email" required />
+                <select name="service" required>
+                    <option value="">Select Service</option>
+                    <option value="Web Design">Web Design</option>
+                    <option value="Development">Development</option>
+                    <option value="SEO">SEO & Analytics</option>
+                </select>
+                <input type="date" name="date" required />
+                <input type="time" name="time" required />
+                <button type="submit" class="btn">Book Now</button>
+            </form>
+            <p id="bookingResponse" class="form-response"></p>
+        </div>
+    </section>
+
+    <section id="calendar-section">
+        <div class="container">
+            <h2>Booked Slots Calendar</h2>
+            <div id="calendar"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Stellar Web. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const isDark = localStorage.getItem('darkMode') === 'true';
+
+        if (isDark) {
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+    </script>
+
+
+
+    <script src="script.js"></script>
+
+    <!-- ✅ Use this version -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+    <!-- ✅ Your calendar logic (must be last) -->
+    <script src="calendar-public.js" defer></script>
+</body>
+
+</html>
